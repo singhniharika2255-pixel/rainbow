@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gemini Flask App</title>
+    <script>
+        async function callGemini() {
+            const prompt = document.getElementById("prompt").value;
+            const response = await fetch("/generate", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ prompt: prompt })
+            });
+            const data = await response.json();
+            document.getElementById("output").innerText = data.result;
+        }
+    </script>
+</head>
+<body>
+<h1>Gemini Flask Demo</h1>
+<input type="text" id="prompt" placeholder="Enter your prompt here" />
+<button onclick="callGemini()">Send to Gemini</button>
+<h2>Response:</h2>
+<pre id="output"></pre>
+</body>
+</html>
